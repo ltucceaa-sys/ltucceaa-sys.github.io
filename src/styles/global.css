@@ -177,3 +177,73 @@ p { margin: 0 0 1em; }
     scroll-behavior: auto !important;
   }
 }
+
+/* Markdown 文章內容（最新消息、活動詳細頁共用） */
+.markdown {
+  line-height: 1.9;
+}
+
+.markdown h2 {
+  margin: 1.8em 0 0.6em;
+  padding-bottom: 6px;
+  border-bottom: 3px solid var(--color-primary-soft);
+  font-size: 1.4rem;
+}
+
+.markdown h3 {
+  margin: 1.4em 0 0.5em;
+  color: var(--color-primary);
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 1.4em;
+}
+
+.markdown li {
+  margin-bottom: 0.5em;
+}
+
+.markdown a {
+  color: var(--color-primary);
+}
+
+.markdown img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+.markdown blockquote {
+  margin: 1.2em 0;
+  padding: 4px 20px;
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.markdown table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.markdown th,
+.markdown td {
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown th {
+  background: var(--color-primary-soft);
+  white-space: nowrap;
+}
+
+.markdown td:first-child {
+  white-space: nowrap;
+}

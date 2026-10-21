@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { formatDate, isoDate } from '../../utils/format';
+import { url } from '../../utils/url';
+
+const news = (await getCollection('news', (n) => !n.data.draft)).sort(
+  (a, b) => +b.data.date - +a.data.date,
+);
+---
+
+<BaseLayout title="最新消息" description="嶺東幼保系友會的公告、活動、系友消息與職涯資訊。">
+  <section class="section">
+    <div class="container">
+      <h1 class="section__title">最新消息</h1>
+      {
+        news.length > 0 ? (
+          <div class="grid">
+            {news.map((n) => (
+              <PostCard
+                href={url(`/news/${n.id}/`)}
+                title={n.data.title}
+                cover={n.data.cover}
+                badge={n.data.category}
+                dateText={formatDate(n.data.date, false)}
+                dateIso={isoDate(n.data.date)}
+                summary={n.data.summary}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">最新消息即將上線，敬請期待。</div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -2,6 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import settings from '../data/site-settings.json';
 import { url } from '../utils/url';
+import { getCollection } from 'astro:content';
+import PostCard from '../components/PostCard.astro';
+import { formatDate, isoDate, EVENT_STATUS_LABEL } from '../utils/format';
+
+const latestNews = (await getCollection('news', (n) => !n.data.draft))
+  .sort((a, b) => +b.data.date - +a.data.date)
+  .slice(0, 3);
+
+const upcomingEvents = (
+  await getCollection(
+    'events',
+    (e) => !e.data.draft && (e.data.status === 'registration' || e.data.status === 'upcoming'),
+  )
+)
+  .sort((a, b) => +a.data.date - +b.data.date)
+  .slice(0, 3);
 ---
 
 <BaseLayout>
@@ -20,14 +36,52 @@ import { url } from '../utils/url';
   <section class="section">
     <div class="container">
       <h2 class="section__title">最新消息</h2>
-      <div class="empty">最新消息即將上線，敬請期待。</div>
+      {
+        latestNews.length > 0 ? (
+          <div class="grid">
+            {latestNews.map((n) => (
+              <PostCard
+                href={url(`/news/${n.id}/`)}
+                title={n.data.title}
+                cover={n.data.cover}
+                badge={n.data.category}
+                dateText={formatDate(n.data.date, false)}
+                dateIso={isoDate(n.data.date)}
+                summary={n.data.summary}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">最新消息即將上線，敬請期待。</div>
+        )
+      }
     </div>
   </section>
 
   <section class="section section--soft">
     <div class="container">
       <h2 class="section__title">近期活動</h2>
-      <div class="empty">目前沒有近期活動。</div>
+      {
+        upcomingEvents.length > 0 ? (
+          <div class="grid">
+            {upcomingEvents.map((e) => (
+              <PostCard
+                href={url(`/events/${e.id}/`)}
+                title={e.data.title}
+                cover={e.data.cover}
+                badge={EVENT_STATUS_LABEL[e.data.status]}
+                badgeTone={e.data.status === 'registration' ? 'accent' : 'primary'}
+                dateText={formatDate(e.data.date)}
+                dateIso={isoDate(e.data.date)}
+                meta={e.data.location}
+                summary={e.data.summary}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">目前沒有近期活動。</div>
+        )
+      }
     </div>
   </section>
 

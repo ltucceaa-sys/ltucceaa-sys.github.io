@@ -1,0 +1,130 @@
+---
+import { Image } from 'astro:assets';
+import { findImage } from '../utils/images';
+
+interface Props {
+  href: string;
+  title: string;
+  cover?: string;
+  badge?: string;
+  badgeTone?: 'primary' | 'accent' | 'muted';
+  dateText: string;
+  dateIso?: string;
+  summary?: string;
+  meta?: string;
+}
+
+const { href, title, cover, badge, badgeTone = 'primary', dateText, dateIso, summary, meta } =
+  Astro.props;
+const image = findImage(cover);
+---
+
+<article class="post card">
+  <a class="post__link" href={href}>
+    <div class="post__cover">
+      {
+        image ? (
+          <Image src={image} alt="" width={640} height={400} loading="lazy" />
+        ) : (
+          <span class="post__placeholder" aria-hidden="true">幼</span>
+        )
+      }
+      {badge && <span class={`post__badge post__badge--${badgeTone}`}>{badge}</span>}
+    </div>
+    <div class="post__body">
+      <p class="post__date">
+        <time datetime={dateIso}>{dateText}</time>
+        {meta && <span class="post__meta">・{meta}</span>}
+      </p>
+      <h3 class="post__title">{title}</h3>
+      {summary && <p class="post__summary">{summary}</p>}
+    </div>
+  </a>
+</article>
+
+<style>
+  .post {
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(80, 55, 30, 0.14);
+  }
+
+  .post__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post__cover {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: var(--color-primary-soft);
+    overflow: hidden;
+  }
+
+  .post__cover :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .post__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .post__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .post__badge--primary {
+    background: var(--color-primary);
+  }
+
+  .post__badge--accent {
+    background: var(--color-accent);
+  }
+
+  .post__badge--muted {
+    background: #8a7f78;
+  }
+
+  .post__body {
+    padding: 18px 20px 22px;
+  }
+
+  .post__date {
+    margin: 0 0 6px;
+    font-size: 0.9rem;
+    color: var(--color-text-soft);
+  }
+
+  .post__title {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+  }
+
+  .post__summary {
+    margin: 0;
+    color: var(--color-text-soft);
+    font-size: 0.95rem;
+  }
+</style>

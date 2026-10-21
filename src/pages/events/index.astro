@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { formatDate, isoDate, EVENT_STATUS_LABEL } from '../../utils/format';
+import { url } from '../../utils/url';
+
+const all = (await getCollection('events', (e) => !e.data.draft)) ?? [];
+const isOpen = (s: string) => s === 'registration' || s === 'upcoming';
+
+// 即將舉行／報名中：日期近的在前。已結束與活動回顧：日期新的在前。
+const upcoming = all.filter((e) => isOpen(e.data.status)).sort((a, b) => +a.data.date - +b.data.date);
+const past = all.filter((e) => !isOpen(e.data.status)).sort((a, b) => +b.data.date - +a.data.date);
+
+const tone = (s: string) => (s === 'registration' ? 'accent' : s === 'upcoming' ? 'primary' : 'muted');
+---
+
+<BaseLayout title="活動專區" description="嶺東幼保系友會的活動資訊、報名與活動回顧。">
+  <section class="section">
+    <div class="container">
+      <h1 class="section__title">活動專區</h1>
+
+      <h2 class="group-title">即將舉行</h2>
+      {
+        upcoming.length > 0 ? (
+          <div class="grid">
+            {upcoming.map((e) => (
+              <PostCard
+                href={url(`/events/${e.id}/`)}
+                title={e.data.title}
+                cover={e.data.cover}
+                badge={EVENT_STATUS_LABEL[e.data.status]}
+                badgeTone={tone(e.data.status)}
+                dateText={formatDate(e.data.date)}
+                dateIso={isoDate(e.data.date)}
+                meta={e.data.location}
+                summary={e.data.summary}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">目前沒有即將舉行的活動，請期待下一次相聚。</div>
+        )
+      }
+
+      <h2 class="group-title">活動回顧</h2>
+      {
+        past.length > 0 ? (
+          <div class="grid">
+            {past.map((e) => (
+              <PostCard
+                href={url(`/events/${e.id}/`)}
+                title={e.data.title}
+                cover={e.data.cover}
+                badge={EVENT_STATUS_LABEL[e.data.status]}
+                badgeTone={tone(e.data.status)}
+                dateText={formatDate(e.data.date)}
+                dateIso={isoDate(e.data.date)}
+                summary={e.data.summary}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">活動回顧即將上線。</div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .group-title {
+    margin: 40px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--color-primary-soft);
+  }
+
+  .group-title:first-of-type {
+    margin-top: 0;
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import { findImage } from '../utils/images';
+
+interface Props {
+  photos: string[];
+  title?: string;
+}
+
+const { photos, title = '活動照片' } = Astro.props;
+const items = photos.map((p) => ({ path: p, image: findImage(p) })).filter((i) => i.image);
+---
+
+{
+  items.length > 0 && (
+    <section class="gallery" aria-label={title}>
+      <h2>{title}</h2>
+      <div class="gallery__grid">
+        {items.map((i) => (
+          <a href={i.image!.src} target="_blank" rel="noopener" class="gallery__item">
+            <Image src={i.image!} alt="" width={480} height={360} loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .gallery {
+    margin-top: 2.4em;
+  }
+
+  .gallery h2 {
+    margin: 0 0 0.8em;
+    padding-bottom: 6px;
+    border-bottom: 3px solid var(--color-primary-soft);
+    font-size: 1.4rem;
+  }
+
+  .gallery__grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .gallery__item {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-soft);
+  }
+
+  .gallery__item :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+  }
+
+  .gallery__item:hover :global(img) {
+    transform: scale(1.04);
+  }
+</style>
