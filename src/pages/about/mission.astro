@@ -1,0 +1,12 @@
+---
+import AboutTextPage from '../../components/AboutTextPage.astro';
+import about from '../../data/about.json';
+const d = about.mission;
+---
+
+<AboutTextPage
+  current="/about/mission/"
+  title={d.title}
+  paragraphs={d.paragraphs}
+  description="嶺東幼保系友會的成立宗旨。"
+/>

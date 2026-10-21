@@ -1,0 +1,12 @@
+---
+import AboutTextPage from '../../components/AboutTextPage.astro';
+import about from '../../data/about.json';
+const d = about.relationship_with_department;
+---
+
+<AboutTextPage
+  current="/about/department/"
+  title={d.title}
+  paragraphs={d.paragraphs}
+  description="嶺東幼保系友會與幼保系的關係。"
+/>

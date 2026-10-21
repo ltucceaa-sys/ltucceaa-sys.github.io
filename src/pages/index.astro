@@ -2,22 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import settings from '../data/site-settings.json';
 import { url } from '../utils/url';
-import { getCollection } from 'astro:content';
-import PostCard from '../components/PostCard.astro';
-import { formatDate, isoDate, EVENT_STATUS_LABEL } from '../utils/format';
-
-const latestNews = (await getCollection('news', (n) => !n.data.draft))
-  .sort((a, b) => +b.data.date - +a.data.date)
-  .slice(0, 3);
-
-const upcomingEvents = (
-  await getCollection(
-    'events',
-    (e) => !e.data.draft && (e.data.status === 'registration' || e.data.status === 'upcoming'),
-  )
-)
-  .sort((a, b) => +a.data.date - +b.data.date)
-  .slice(0, 3);
 ---
 
 <BaseLayout>
@@ -33,79 +17,14 @@ const upcomingEvents = (
       <a class="btn" href={`mailto:${settings.email}`}>聯絡系友會</a>
     </div>
   </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">最新消息</h2>
-      {
-        latestNews.length > 0 ? (
-          <div class="grid">
-            {latestNews.map((n) => (
-              <PostCard
-                href={url(`/news/${n.id}/`)}
-                title={n.data.title}
-                cover={n.data.cover}
-                badge={n.data.category}
-                dateText={formatDate(n.data.date, false)}
-                dateIso={isoDate(n.data.date)}
-                summary={n.data.summary}
-              />
-            ))}
-          </div>
-        ) : (
-          <div class="empty">最新消息即將上線，敬請期待。</div>
-        )
-      }
-    </div>
-  </section>
-
-  <section class="section section--soft">
-    <div class="container">
-      <h2 class="section__title">近期活動</h2>
-      {
-        upcomingEvents.length > 0 ? (
-          <div class="grid">
-            {upcomingEvents.map((e) => (
-              <PostCard
-                href={url(`/events/${e.id}/`)}
-                title={e.data.title}
-                cover={e.data.cover}
-                badge={EVENT_STATUS_LABEL[e.data.status]}
-                badgeTone={e.data.status === 'registration' ? 'accent' : 'primary'}
-                dateText={formatDate(e.data.date)}
-                dateIso={isoDate(e.data.date)}
-                meta={e.data.location}
-                summary={e.data.summary}
-              />
-            ))}
-          </div>
-        ) : (
-          <div class="empty">目前沒有近期活動。</div>
-        )
-      }
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">系友風采</h2>
-      <div class="empty">系友故事與職涯分享，敬請期待。</div>
-    </div>
-  </section>
-
-  <section class="section section--soft cta">
-    <div class="container">
-      <h2>想和系友會聯絡嗎？</h2>
-      <p>有任何問題或建議，歡迎寄信給我們。</p>
-      <a class="btn" href={`mailto:${settings.email}`}>聯絡系友會</a>
-      <a class="btn btn--outline" href={url('/about/')}>認識系友會</a>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
   .hero {
-    padding: 80px 0 72px;
+    display: flex;
+    align-items: center;
+    min-height: 68vh;
+    padding: 64px 0;
     text-align: center;
     background:
       radial-gradient(circle at 15% 20%, var(--color-accent-soft), transparent 45%),
@@ -140,11 +59,5 @@ const upcomingEvents = (
     font-size: 1.1rem;
   }
 
-  .cta {
-    text-align: center;
-  }
 
-  .cta .btn {
-    margin: 4px;
-  }
 </style>

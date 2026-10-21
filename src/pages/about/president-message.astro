@@ -1,0 +1,14 @@
+---
+import AboutTextPage from '../../components/AboutTextPage.astro';
+import about from '../../data/about.json';
+const d = about.president_message;
+const byline = [d.president_name, d.term].filter(Boolean).join('　');
+---
+
+<AboutTextPage
+  current="/about/president-message/"
+  title={d.title}
+  paragraphs={d.paragraphs}
+  byline={byline}
+  description="嶺東幼保系友會會長的話。"
+/>

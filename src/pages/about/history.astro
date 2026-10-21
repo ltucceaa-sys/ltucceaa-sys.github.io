@@ -1,0 +1,47 @@
+---
+import AboutTextPage from '../../components/AboutTextPage.astro';
+import about from '../../data/about.json';
+const d = about.history;
+---
+
+<AboutTextPage
+  current="/about/history/"
+  title={d.title}
+  paragraphs={[]}
+  description="嶺東幼保系友會的歷史沿革。"
+>
+  {
+    d.items.length > 0 && (
+      <ol class="timeline">
+        {d.items.map((item) => (
+          <li>
+            <span class="timeline__year">{item.year}</span>
+            <span>{item.text}</span>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</AboutTextPage>
+
+<style>
+  .timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 3px solid var(--color-primary-soft);
+  }
+
+  .timeline li {
+    display: flex;
+    gap: 16px;
+    padding: 0 0 20px 20px;
+    line-height: 1.8;
+  }
+
+  .timeline__year {
+    flex: 0 0 4em;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+</style>

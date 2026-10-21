@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutNav from './AboutNav.astro';
+
+interface Props {
+  current: string;
+  title: string;
+  paragraphs: string[];
+  description?: string;
+  byline?: string;
+}
+
+const { current, title, paragraphs, description, byline } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <AboutNav current={current} />
+  <section class="section">
+    <div class="container prose">
+      <h1 class="section__title">{title}</h1>
+      {
+        paragraphs.length > 0 ? (
+          <>
+            {paragraphs.map((p) => <p>{p}</p>)}
+            {byline && <p class="byline">— {byline}</p>}
+          </>
+        ) : (
+          <div class="empty">內容即將更新。</div>
+        )
+      }
+      <slot />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose {
+    max-width: 760px;
+  }
+
+  .prose p {
+    line-height: 1.9;
+  }
+
+  .byline {
+    text-align: right;
+    color: var(--color-text-soft);
+  }
+</style>
