@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import settings from '../../data/site-settings.json';
+---
+
+<BaseLayout title="聯絡我們" description={`聯絡${settings.name}：請寄信至 ${settings.email}。`}>
+  <section class="section">
+    <div class="container wrap">
+      <h1 class="section__title">聯絡我們</h1>
+      <div class="card contact">
+        <h2>{settings.name}</h2>
+        <p class="en">{settings.englishName}</p>
+        <p class="mail">
+          Email：<a href={`mailto:${settings.email}`}>{settings.email}</a>
+        </p>
+        <p>
+          <a class="btn" href={`mailto:${settings.email}`}>寄信給系友會</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .wrap {
+    max-width: 640px;
+  }
+
+  .contact {
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  .contact h2 {
+    margin-bottom: 4px;
+  }
+
+  .en {
+    color: var(--color-text-soft);
+    font-size: 0.95rem;
+  }
+
+  .mail {
+    margin: 24px 0;
+    font-size: 1.15rem;
+  }
+
+  .mail a {
+    color: var(--color-primary);
+  }
+</style>

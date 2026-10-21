@@ -1,0 +1,51 @@
+---
+import { url } from '../utils/url';
+
+interface Props {
+  title: string;
+  lead?: string;
+}
+
+const { title, lead = '這個單元正在建置中，敬請期待。' } = Astro.props;
+---
+
+<section class="section">
+  <div class="container wrap">
+    <h1 class="section__title">{title}</h1>
+    <div class="empty">
+      <p class="icon" aria-hidden="true">🌱</p>
+      <p class="big">建置中</p>
+      <p>{lead}</p>
+      <p>
+        <a class="btn" href={url('/')}>回到首頁</a>
+        <a class="btn btn--outline" href={url('/news/')}>看看最新消息</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wrap {
+    max-width: 720px;
+  }
+
+  .empty {
+    padding: 56px 20px;
+  }
+
+  .icon {
+    margin: 0 0 8px;
+    font-size: 2.4rem;
+  }
+
+  .big {
+    margin: 0 0 8px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .btn {
+    margin: 4px;
+  }
+</style>
