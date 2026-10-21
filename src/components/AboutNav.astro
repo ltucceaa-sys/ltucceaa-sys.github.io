@@ -68,4 +68,27 @@ const links = [
     background: var(--color-primary);
     color: #fff;
   }
+
+  /* 手機：改成整齊的兩欄格狀，按鈕等寬、文字置中不換行 */
+  @media (max-width: 640px) {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 14px 0;
+    }
+
+    a {
+      padding: 10px 8px;
+      border: 1px solid var(--color-border);
+      font-size: 0.95rem;
+      line-height: 1.4;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    a[aria-current='page'] {
+      border-color: var(--color-primary);
+    }
+  }
 </style>

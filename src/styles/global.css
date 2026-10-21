@@ -171,6 +171,26 @@ p { margin: 0 0 1em; }
   left: 8px;
 }
 
+/* 手機版：縮小字級與留白，閱讀更舒適 */
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .section {
+    padding: 36px 0;
+  }
+
+  .section__title {
+    margin-bottom: 1.2em;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
