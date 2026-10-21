@@ -26,11 +26,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
-      # 目前還沒有 package-lock.json，所以暫時用 npm install。
-      # 取得 lock 檔並提交後，請改回 `npm ci` 並加上 `cache: npm`。
       - name: 安裝套件
-        run: npm install
+        run: npm ci
 
       - name: 建置網站
         run: npm run build
