@@ -4,7 +4,9 @@ import AboutNav from '../../components/AboutNav.astro';
 import PersonCard from '../../components/PersonCard.astro';
 import { officers, officersByTerm } from '../../utils/officers';
 
-const terms = officersByTerm(officers.filter((o) => o.status === 'past'));
+// 歷屆幹部頁列出所有屆次（包含現任這一屆），完整保存歷史。
+const terms = officersByTerm(officers);
+const currentTerms = new Set(officers.filter((o) => o.status === 'current').map((o) => o.term));
 ---
 
 <BaseLayout title="歷屆幹部" description="嶺東幼保系友會歷屆幹部名單，依屆次整理。">
@@ -19,6 +21,7 @@ const terms = officersByTerm(officers.filter((o) => o.status === 'past'));
             <div class="term" id={`term-${t.term}`}>
               <h2>
                 第 {t.term} 屆{t.year && <small>（{t.year} 年）</small>}
+                {currentTerms.has(t.term) && <span class="badge">現任</span>}
               </h2>
               {t.groups.map((g) => (
                 <div class="group">
@@ -61,6 +64,17 @@ const terms = officersByTerm(officers.filter((o) => o.status === 'past'));
     font-size: 0.6em;
     font-weight: 400;
     color: var(--color-text-soft);
+  }
+
+  .badge {
+    margin-left: 10px;
+    padding: 2px 12px;
+    border-radius: 999px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-size: 0.55em;
+    font-weight: 700;
+    vertical-align: middle;
   }
 
   .group {
