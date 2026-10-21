@@ -8,6 +8,7 @@ location: "嶺東科技大學 幼保系視聽階梯教室 HT108（校內場地�
 organizer: "嶺東科技大學幼兒保育系系友會"
 coOrganizer: "嶺東科技大學幼兒保育系系辦公室"
 status: registration
+registrationUrl: "https://docs.google.com/forms/d/1il0vjhdkjn4QfD9melBa_OBH2DPUSR-0903PFMTm71c/previewResponse"
 cover: events/2026/alumni-homecoming/poster.jpg
 ---
 
@@ -49,4 +50,6 @@ cover: events/2026/alumni-homecoming/poster.jpg
 
 ## 報名方式
 
-**報名至 2026 年 11 月 20 日止。** 報名連結公布後會更新在本頁。有任何問題，歡迎寄信至 [ltucceaa@gmail.com](mailto:ltucceaa@gmail.com)。
+**報名至 2026 年 11 月 20 日止。**
+
+請點選頁面上的「我要報名」，或[前往報名表單](https://docs.google.com/forms/d/1il0vjhdkjn4QfD9melBa_OBH2DPUSR-0903PFMTm71c/previewResponse)。有任何問題，歡迎寄信至 [ltucceaa@gmail.com](mailto:ltucceaa@gmail.com)。

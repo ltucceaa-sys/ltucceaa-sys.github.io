@@ -6,6 +6,8 @@ summary: "2026 系友回娘家｜教保專業知能增能研習暨系友共學�
 author: 嶺東幼保系友會
 cover: events/2026/alumni-homecoming/poster.jpg
 links:
+  - label: 我要報名（Google 表單）
+    url: https://docs.google.com/forms/d/1il0vjhdkjn4QfD9melBa_OBH2DPUSR-0903PFMTm71c/previewResponse
   - label: 查看活動詳細資訊
     url: /events/2026-alumni-homecoming/
 ---
@@ -23,6 +25,8 @@ links:
 - **研習時數**：完整參與核發教保專業知能研習時數 3 小時
 
 現場備有茶水點心，歡迎系友踴躍參與。
+
+[**我要報名 →**](https://docs.google.com/forms/d/1il0vjhdkjn4QfD9melBa_OBH2DPUSR-0903PFMTm71c/previewResponse)
 
 完整的議程與簽到退須知，請見[活動詳細頁](/events/2026-alumni-homecoming/)。
 
