@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutNav from '../../components/AboutNav.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import { sortedPresidents } from '../../utils/officers';
+
+const list = sortedPresidents();
+---
+
+<BaseLayout title="歷屆會長" description="嶺東幼保系友會歷屆會長。">
+  <AboutNav current="/about/presidents/" />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="section__title">歷屆會長</h1>
+      {
+        list.length > 0 ? (
+          <div class="grid">
+            {list.map((p) => (
+              <PersonCard
+                name={p.name}
+                title={`第 ${p.term} 屆會長`}
+                subtitle={p.year ? `${p.year} 年` : undefined}
+                photo={p.photo}
+                description={p.description}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">歷屆會長名單即將更新。</div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutNav from '../../components/AboutNav.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import { officers, officersByTerm } from '../../utils/officers';
+
+const terms = officersByTerm(officers.filter((o) => o.status === 'past'));
+---
+
+<BaseLayout title="歷屆幹部" description="嶺東幼保系友會歷屆幹部名單，依屆次整理。">
+  <AboutNav current="/about/past-officers/" />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="section__title">歷屆幹部</h1>
+      {
+        terms.length > 0 ? (
+          terms.map((t) => (
+            <div class="term" id={`term-${t.term}`}>
+              <h2>
+                第 {t.term} 屆{t.year && <small>（{t.year} 年）</small>}
+              </h2>
+              {t.groups.map((g) => (
+                <div class="group">
+                  <h3>{g.label}</h3>
+                  <div class="grid">
+                    {g.members.map((o) => (
+                      <PersonCard
+                        name={o.name}
+                        title={o.title}
+                        photo={o.photo}
+                        description={o.description}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))
+        ) : (
+          <div class="empty">歷屆幹部名單即將更新。</div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .term {
+    margin-bottom: 48px;
+    scroll-margin-top: 80px;
+  }
+
+  .term h2 {
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--color-primary-soft);
+  }
+
+  .term h2 small {
+    margin-left: 8px;
+    font-size: 0.6em;
+    font-weight: 400;
+    color: var(--color-text-soft);
+  }
+
+  .group {
+    margin: 24px 0;
+  }
+
+  .group h3 {
+    color: var(--color-primary);
+  }
+</style>

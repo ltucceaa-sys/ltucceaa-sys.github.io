@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutNav from '../../components/AboutNav.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import { currentOfficers, officersByTerm } from '../../utils/officers';
+
+const current = currentOfficers();
+const termInfo = officersByTerm(current)[0];
+const heading = termInfo
+  ? `第 ${termInfo.term} 屆${termInfo.year ? `（${termInfo.year} 年）` : ''}`
+  : '';
+---
+
+<BaseLayout title="現任幹部" description="嶺東幼保系友會現任幹部名單。">
+  <AboutNav current="/about/officers/" />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="section__title">現任幹部</h1>
+      {heading && <p class="term">{heading}</p>}
+      {
+        current.length > 0 ? (
+          <div class="grid">
+            {current.map((o) => (
+              <PersonCard
+                name={o.name}
+                title={o.title}
+                photo={o.photo}
+                description={o.description}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">現任幹部名單即將更新。</div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .term {
+    margin: -0.8em 0 1.6em;
+    text-align: center;
+    color: var(--color-text-soft);
+  }
+</style>
