@@ -34,7 +34,8 @@ const ogImage = absoluteUrl(image);
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="icon" type="image/png" sizes="64x64" href={url('/favicon.png')} />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph：Facebook、LINE 分享時會用到 -->

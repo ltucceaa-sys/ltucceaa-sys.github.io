@@ -10,7 +10,7 @@ const isActive = (href: string) =>
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href={url('/')}>
-      <span class="brand__logo" aria-hidden="true">幼</span>
+      <img class="brand__logo" src={url('/logo-mark.png')} alt="" width="44" height="44" />
       <span class="brand__text">
         <strong>{settings.name}</strong>
       </span>
@@ -64,16 +64,11 @@ const isActive = (href: string) =>
     text-decoration: none;
   }
 
-  /* Logo 預留位置：換成正式 Logo 時，替換這個元素即可 */
   .brand__logo {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--color-primary);
-    color: #fff;
-    font-weight: 700;
+    display: block;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
   }
 
   .nav ul {

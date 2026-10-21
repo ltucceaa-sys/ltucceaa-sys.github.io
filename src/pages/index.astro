@@ -23,6 +23,7 @@ const upcomingEvents = (
 <BaseLayout>
   <section class="hero">
     <div class="container hero__inner">
+      <img class="hero__logo" src={url('/logo-mark.png')} alt="" width="112" height="112" />
       <p class="hero__eyebrow">歡迎回家</p>
       <h1>{settings.name}</h1>
       <p class="hero__en">{settings.englishName}</p>
@@ -110,6 +111,13 @@ const upcomingEvents = (
       radial-gradient(circle at 15% 20%, var(--color-accent-soft), transparent 45%),
       radial-gradient(circle at 85% 80%, var(--color-primary-soft), transparent 45%),
       var(--color-bg);
+  }
+
+  .hero__logo {
+    display: block;
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 12px;
   }
 
   .hero__eyebrow {
