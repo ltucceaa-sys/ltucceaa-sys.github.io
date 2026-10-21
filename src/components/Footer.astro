@@ -1,0 +1,60 @@
+---
+import settings from '../data/site-settings.json';
+import { url } from '../utils/url';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <strong>{settings.name}</strong>
+      <p class="en">{settings.englishName}</p>
+    </div>
+    <div>
+      <p>
+        Email：<a href={`mailto:${settings.email}`}>{settings.email}</a>
+      </p>
+      <p>
+        <a href={url('/contact/')}>聯絡我們</a>
+      </p>
+    </div>
+  </div>
+  <div class="container copyright">© {year} {settings.name}</div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 40px;
+    padding: 40px 0 24px;
+    background: #2d3a36;
+    color: #e9efec;
+    font-size: 0.95rem;
+  }
+
+  .site-footer a {
+    color: #ffd9b8;
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .en {
+    margin: 4px 0 0;
+    max-width: 480px;
+    font-size: 0.85rem;
+    color: #b9c7c1;
+  }
+
+  .copyright {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.85rem;
+    color: #b9c7c1;
+  }
+</style>

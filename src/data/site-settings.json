@@ -1,0 +1,22 @@
+{
+  "name": "嶺東幼保系友會",
+  "englishName": "Alumni Association of the Department of Child Care and Education, Ling Tung University",
+  "email": "ltucceaa@gmail.com",
+  "description": "嶺東幼保系友會官方網站：系友會資訊、最新消息、活動與歷屆幹部。",
+  "nav": [
+    { "label": "首頁", "href": "/" },
+    { "label": "關於系友會", "href": "/about/" },
+    { "label": "最新消息", "href": "/news/" },
+    { "label": "活動專區", "href": "/events/" },
+    { "label": "系友風采", "href": "/alumni/" },
+    { "label": "職涯與資源", "href": "/careers/" },
+    { "label": "聯絡我們", "href": "/contact/" }
+  ],
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "line": "",
+    "lineCommunity": "",
+    "department": ""
+  }
+}

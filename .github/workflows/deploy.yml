@@ -1,0 +1,52 @@
+name: Deploy to GitHub Pages
+
+# push 到 main 就自動 build 並部署；也可以在 Actions 頁面手動執行
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取得原始碼
+        uses: actions/checkout@v4
+
+      - name: 安裝 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # 目前還沒有 package-lock.json，所以暫時用 npm install。
+      # 取得 lock 檔並提交後，請改回 `npm ci` 並加上 `cache: npm`。
+      - name: 安裝套件
+        run: npm install
+
+      - name: 建置網站
+        run: npm run build
+
+      - name: 上傳建置結果
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

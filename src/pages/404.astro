@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../utils/url';
+---
+
+<BaseLayout title="找不到頁面" noindex>
+  <section class="section">
+    <div class="container not-found">
+      <h1>找不到這個頁面</h1>
+      <p>網址可能輸入錯誤，或這個頁面已經移動。</p>
+      <p>
+        <a class="btn" href={url('/')}>回到首頁</a>
+        <a class="btn btn--outline" href={url('/news/')}>看看最新消息</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .not-found .btn {
+    margin: 4px;
+  }
+</style>

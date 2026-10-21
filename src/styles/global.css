@@ -1,0 +1,179 @@
+/* 嶺東幼保系友會：設計系統
+   色彩、字級、間距都集中在這裡，要換風格只改 :root。 */
+
+:root {
+  /* 色彩：溫暖、清爽，帶一點教育與幼保的親切感 */
+  --color-bg: #fffaf3;
+  --color-surface: #ffffff;
+  --color-surface-soft: #fdf1e1;
+  --color-text: #3a3330;
+  --color-text-soft: #6f655f;
+  --color-primary: #2f7d6d;       /* 沉穩的綠 */
+  --color-primary-dark: #256558;
+  --color-primary-soft: #e3f2ee;
+  --color-accent: #e8884a;        /* 溫暖的橘 */
+  --color-accent-soft: #fde7d6;
+  --color-border: #eadfd2;
+
+  /* 字型：使用系統中文字型，不依賴外部字型服務 */
+  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 10px rgba(80, 55, 30, 0.08);
+  --max-width: 1080px;
+  --gutter: 20px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+h1, h2, h3 {
+  line-height: 1.4;
+  margin: 0 0 0.6em;
+}
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 1em; }
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  padding: 56px 0;
+}
+
+.section--soft {
+  background: var(--color-surface-soft);
+}
+
+.section__title {
+  text-align: center;
+  margin-bottom: 1.6em;
+}
+
+.section__title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+
+/* 按鈕 */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid var(--color-primary);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background: var(--color-primary-soft);
+}
+
+/* 卡片 */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+/* 空資料狀態 */
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-text-soft);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+}
+
+/* 鍵盤操作時的焦點外框 */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

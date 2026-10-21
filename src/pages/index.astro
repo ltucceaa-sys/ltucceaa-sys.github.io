@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import settings from '../data/site-settings.json';
+import { url } from '../utils/url';
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero__inner">
+      <p class="hero__eyebrow">歡迎回家</p>
+      <h1>{settings.name}</h1>
+      <p class="hero__en">{settings.englishName}</p>
+      <p class="hero__lead">
+        串起每一位幼保人的連結，分享消息、活動與成長，一起陪孩子也陪彼此。
+      </p>
+      <a class="btn" href={`mailto:${settings.email}`}>聯絡系友會</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">最新消息</h2>
+      <div class="empty">最新消息即將上線，敬請期待。</div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <h2 class="section__title">近期活動</h2>
+      <div class="empty">目前沒有近期活動。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">系友風采</h2>
+      <div class="empty">系友故事與職涯分享，敬請期待。</div>
+    </div>
+  </section>
+
+  <section class="section section--soft cta">
+    <div class="container">
+      <h2>想和系友會聯絡嗎？</h2>
+      <p>有任何問題或建議，歡迎寄信給我們。</p>
+      <a class="btn" href={`mailto:${settings.email}`}>聯絡系友會</a>
+      <a class="btn btn--outline" href={url('/about/')}>認識系友會</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 80px 0 72px;
+    text-align: center;
+    background:
+      radial-gradient(circle at 15% 20%, var(--color-accent-soft), transparent 45%),
+      radial-gradient(circle at 85% 80%, var(--color-primary-soft), transparent 45%),
+      var(--color-bg);
+  }
+
+  .hero__eyebrow {
+    margin: 0 0 8px;
+    color: var(--color-accent);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+  }
+
+  .hero__en {
+    max-width: 640px;
+    margin: 0 auto 20px;
+    color: var(--color-text-soft);
+    font-size: 0.95rem;
+  }
+
+  .hero__lead {
+    max-width: 560px;
+    margin: 0 auto 28px;
+    font-size: 1.1rem;
+  }
+
+  .cta {
+    text-align: center;
+  }
+
+  .cta .btn {
+    margin: 4px;
+  }
+</style>

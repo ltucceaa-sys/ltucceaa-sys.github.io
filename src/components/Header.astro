@@ -1,0 +1,159 @@
+---
+import settings from '../data/site-settings.json';
+import { url } from '../utils/url';
+
+const current = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? current === '/' : current.startsWith(url(href));
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href={url('/')}>
+      <span class="brand__logo" aria-hidden="true">幼</span>
+      <span class="brand__text">
+        <strong>{settings.name}</strong>
+      </span>
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="開啟選單" />
+    <label for="nav-toggle" class="nav-burger" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="nav" aria-label="主選單">
+      <ul>
+        {settings.nav.map((item) => (
+          <li>
+            <a
+              href={url(item.href)}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 250, 243, 0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 64px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  /* Logo 預留位置：換成正式 Logo 時，替換這個元素即可 */
+  .brand__logo {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .nav ul {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .nav a:hover,
+  .nav a[aria-current='page'] {
+    background: var(--color-primary-soft);
+    color: var(--color-primary-dark);
+  }
+
+  /* 手機版：不需要 JavaScript 的選單 */
+  .nav-toggle,
+  .nav-burger {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    .nav-burger {
+      display: grid;
+      gap: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--color-text);
+    }
+
+    .nav-toggle {
+      display: block;
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .nav-toggle:focus-visible + .nav-burger {
+      outline: 3px solid var(--color-accent);
+    }
+
+    .nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: 8px var(--gutter) 16px;
+    }
+
+    .nav-toggle:checked ~ .nav {
+      display: block;
+    }
+
+    .nav ul {
+      flex-direction: column;
+    }
+
+    .nav a {
+      padding: 12px;
+    }
+  }
+</style>

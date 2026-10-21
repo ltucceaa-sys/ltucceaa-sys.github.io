@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import settings from '../data/site-settings.json';
+import { url, absoluteUrl } from '../utils/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = settings.description,
+  image = '/images/site/og-default.png',
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title}｜${settings.name}` : settings.name;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://ltucceaa-sys.github.io').href;
+const ogImage = absoluteUrl(image);
+---
+
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph：Facebook、LINE 分享時會用到 -->
+    <meta property="og:site_name" content={settings.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="zh_TW" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要內容</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
