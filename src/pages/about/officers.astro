@@ -4,8 +4,21 @@ import AboutNav from '../../components/AboutNav.astro';
 import PersonCard from '../../components/PersonCard.astro';
 import { currentOfficers, officersByTerm } from '../../utils/officers';
 
-const current = currentOfficers();
-const termInfo = officersByTerm(current)[0];
+const all = currentOfficers();
+const termInfo = officersByTerm(all)[0];
+
+// 同一個人兼任多個職稱時，合併成一張卡片，職稱以「、」連接。
+const current = [];
+for (const o of all) {
+  const same = current.find((c) => c.name === o.name);
+  if (same) {
+    same.title = `${same.title}、${o.title}`;
+    same.description ||= o.description;
+    same.photo ||= o.photo;
+  } else {
+    current.push({ ...o });
+  }
+}
 const heading = termInfo
   ? `第 ${termInfo.term} 屆${termInfo.year ? `（${termInfo.year} 年）` : ''}`
   : '';

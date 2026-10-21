@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "id": "term-1-president",
+    "year": 2026,
+    "term": 1,
+    "name": "謝沂廷",
+    "title": "會長",
+    "photo": "",
+    "description": "2025 畢業・112 級・二技",
+    "sort_order": 1,
+    "status": "current"
+  },
+  {
+    "id": "term-1-vice-president",
+    "year": 2026,
+    "term": 1,
+    "name": "張芝汶",
+    "title": "副會長",
+    "photo": "",
+    "description": "",
+    "sort_order": 2,
+    "status": "current"
+  },
+  {
+    "id": "term-1-secretary-general",
+    "year": 2026,
+    "term": 1,
+    "name": "林雨澄",
+    "title": "總幹事",
+    "photo": "",
+    "description": "",
+    "sort_order": 3,
+    "status": "current"
+  },
+  {
+    "id": "term-1-secretary",
+    "year": 2026,
+    "term": 1,
+    "name": "劉梅蘭",
+    "title": "秘書",
+    "photo": "",
+    "description": "",
+    "sort_order": 4,
+    "status": "current"
+  },
+  {
+    "id": "term-1-finance",
+    "year": 2026,
+    "term": 1,
+    "name": "李莞霜",
+    "title": "財務組",
+    "photo": "",
+    "description": "2024 畢業・111 級・二技",
+    "sort_order": 5,
+    "status": "current"
+  },
+  {
+    "id": "term-1-activities",
+    "year": 2026,
+    "term": 1,
+    "name": "閆翠潧",
+    "title": "活動組",
+    "photo": "",
+    "description": "",
+    "sort_order": 6,
+    "status": "current"
+  },
+  {
+    "id": "term-1-publicity",
+    "year": 2026,
+    "term": 1,
+    "name": "閆翠潧",
+    "title": "宣傳組",
+    "photo": "",
+    "description": "",
+    "sort_order": 7,
+    "status": "current"
+  }
+]
