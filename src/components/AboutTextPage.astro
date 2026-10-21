@@ -25,7 +25,7 @@ const { current, title, paragraphs, description, byline } = Astro.props;
             {byline && <p class="byline">— {byline}</p>}
           </>
         ) : (
-          <div class="empty">內容即將更新。</div>
+          !Astro.slots.has('default') && <div class="empty">內容即將更新。</div>
         )
       }
       <slot />

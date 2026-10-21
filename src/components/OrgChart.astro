@@ -1,0 +1,143 @@
+---
+interface Props {
+  levels: string[][];
+  branches: string[];
+}
+
+const { levels, branches } = Astro.props;
+---
+
+<div class="org" role="group" aria-label="組織架構圖">
+  {
+    levels.map((level, i) => (
+      <>
+        {i > 0 && <span class="stem" aria-hidden="true" />}
+        <div class="level">
+          {level.map((t) => <div class="node">{t}</div>)}
+        </div>
+      </>
+    ))
+  }
+  {
+    branches.length > 0 && (
+      <>
+        <span class="stem" aria-hidden="true" />
+        <div class="row">
+          {branches.map((t) => (
+            <div class="child">
+              <div class="node node--leaf">{t}</div>
+            </div>
+          ))}
+        </div>
+      </>
+    )
+  }
+</div>
+
+<style>
+  .org {
+    --line: #8fb8ac;
+    --gap: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 8px 0 8px;
+  }
+
+  .level,
+  .row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .level {
+    gap: 16px;
+  }
+
+  .node {
+    min-width: 7em;
+    padding: 12px 24px;
+    text-align: center;
+    font-weight: 700;
+    background: var(--color-primary-soft);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    color: var(--color-text);
+  }
+
+  .node--leaf {
+    min-width: 0;
+    width: 6em;
+    padding: 12px 8px;
+    background: var(--color-surface);
+  }
+
+  .stem {
+    display: block;
+    width: 2px;
+    height: var(--gap);
+    background: var(--line);
+  }
+
+  .child {
+    position: relative;
+    padding: var(--gap) 8px 0;
+  }
+
+  /* 橫線 */
+  .child::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-top: 2px solid var(--line);
+  }
+
+  .child:first-child::before {
+    left: 50%;
+  }
+
+  .child:last-child::before {
+    right: 50%;
+  }
+
+  .child:only-child::before {
+    display: none;
+  }
+
+  /* 往下接到方框的短直線 */
+  .child::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: var(--gap);
+    border-left: 2px solid var(--line);
+  }
+
+  /* 手機：改成由上往下直排 */
+  @media (max-width: 700px) {
+    .row {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .child {
+      padding: 0;
+    }
+
+    .child + .child {
+      margin-top: 12px;
+    }
+
+    .child::before,
+    .child::after {
+      display: none;
+    }
+
+    .node--leaf {
+      width: 9em;
+    }
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import AboutTextPage from '../../components/AboutTextPage.astro';
 import about from '../../data/about.json';
+import OrgChart from '../../components/OrgChart.astro';
 import { url } from '../../utils/url';
 const d = about.organization;
 ---
@@ -11,13 +12,7 @@ const d = about.organization;
   paragraphs={d.paragraphs}
   description="嶺東幼保系友會的組織架構與幹部職稱。"
 >
-  {
-    d.roles.length > 0 && (
-      <ul class="roles" aria-label="幹部職稱">
-        {d.roles.map((r) => <li>{r}</li>)}
-      </ul>
-    )
-  }
+  <OrgChart levels={d.chart.levels} branches={d.chart.branches} />
   <p class="more">
     <a class="btn" href={url('/about/officers/')}>看現任幹部</a>
     <a class="btn btn--outline" href={url('/about/past-officers/')}>看歷屆幹部</a>
@@ -25,22 +20,6 @@ const d = about.organization;
 </AboutTextPage>
 
 <style>
-  .roles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 0 0 24px;
-    padding: 0;
-    list-style: none;
-  }
-
-  .roles li {
-    padding: 6px 16px;
-    border-radius: 999px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-  }
-
   .more {
     margin-top: 28px;
     text-align: center;
